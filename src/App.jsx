@@ -1,13 +1,18 @@
+import ErrorPage from "./Components/Error";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
+import JobSingle from "./Components/JobSingle";
+import Private from "./Components/Private";
 import Base from "./Layout/Base";
 import data from "./data/jobpost.json";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Base />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -16,6 +21,18 @@ function App() {
         {
           path: "/blog",
           element: <div className="text-2xl">Blog Hello world!</div>,
+        },
+        {
+          path: "/job/:id",
+          element: (
+            <Private>
+              <JobSingle />
+            </Private>
+          ),
+          errorElement: <ErrorPage />,
+          loader: ({ params }) => {
+            return data.find((item) => item.id == params.id);
+          },
         },
       ],
     },

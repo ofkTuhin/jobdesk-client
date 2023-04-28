@@ -11,8 +11,10 @@ const Header = () => {
         </div>
         <ul>
           {menu.map((item) => (
-            <li className="text-base capitalize inline-block mr-4">
-              <Link to={slugger.slug(item)}>{item}</Link>
+            <li key={item} className="text-base capitalize inline-block mr-4">
+              <Link to={item === "home" ? "/" : slugger.slug(item)}>
+                {item}
+              </Link>
             </li>
           ))}
         </ul>

@@ -21,5 +21,5 @@ export default {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwind-bootstrap-grid")],
 };
