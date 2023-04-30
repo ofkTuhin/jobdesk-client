@@ -1,7 +1,14 @@
 import GithubSluggerr from "github-slugger";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 const menu = ["home", "applied job", "blog", "contact"];
 const Header = () => {
+  const navgate = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem("login");
+    if (!localStorage.getItem("login")) {
+      navgate("/");
+    }
+  };
   const slugger = new GithubSluggerr();
   return (
     <header className="py-4">
@@ -18,7 +25,21 @@ const Header = () => {
             </li>
           ))}
         </ul>
-        <a href="#">link</a>
+        {localStorage.getItem("login") ? (
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            onClick={handleLogOut}
+          >
+            sign out
+          </button>
+        ) : (
+          <NavLink
+            to="/login"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            sign in
+          </NavLink>
+        )}
       </nav>
     </header>
   );

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 const Private = ({ children }) => {
-  const isAuth = false;
+  const [isAuth, setIsAuth] = useState(false);
+
+  const login = localStorage.getItem("login");
+
   const location = useLocation();
-  if (!isAuth) {
+  if (!login) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;

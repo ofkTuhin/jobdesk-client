@@ -8,3 +8,8 @@ body {
 .container {
   margin: auto;
 }
+@layer components {
+  .primary-gradeint {
+    @apply bg-gradient-to-r from-primary to-[#9873FF];
+  }
+}
